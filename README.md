@@ -98,6 +98,32 @@ the full check suite locally are in [`CONTRIBUTING.md`](./CONTRIBUTING.md).
 CI and Codecov are already fully configured and working (verified
 2026-07-26) — no setup needed.
 
+## Upstream submission checklist (once the world is functional)
+
+Not relevant yet — revisit once the build plan's milestones above are done
+(a real region graph, real logic, a playable goal). Two distribution paths,
+pick one when the time comes:
+
+- **Standalone `.apworld`**: package with Archipelago's "Build APWorlds"
+  launcher tool. Needs an `archipelago.json` manifest (`game` is required;
+  `world_version`/`authors` recommended). No review or notification needed —
+  build it and share it.
+- **Merged into Archipelago core** (`ArchipelagoMW/Archipelago`'s `worlds/`
+  folder, ships to every AP install): fork that repo, move this package to
+  `worlds/mgsdelta/`, open a normal PR. Reaching out on Discord's
+  `#ap-world-dev` channel first is recommended, not mandatory. After merge,
+  this becomes an ongoing **world maintainer** role: stay reachable on
+  Discord for issues/updates on this world, review (or arrange review of)
+  PRs touching it, fix breakage when core changes affect it, periodically
+  test against `main` (especially during RC phases), and give notice before
+  extended absences.
+
+Either path needs, before it's ready:
+- A `WebWorld` instance wired into `__init__.py`.
+- At least one setup guide and one game info page
+  (`docs/setup_en.md` / `docs/en_Metal Gear Solid Delta.md`, per the build
+  plan above).
+
 ## License
 
 TBD — pick something compatible with Archipelago's own license (MIT) before
