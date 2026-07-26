@@ -82,9 +82,15 @@ actually verify ownership of at runtime.
 
 ## Status
 
-Not started — directory scaffold only. Next concrete step is #1 above (skeleton
-world + frog-only location set), which can happen in parallel with the connector's
-recon phase.
+Tooling/CI scaffold done (lint, types, tests+coverage, mutation testing — see
+[`CONTRIBUTING.md`](./CONTRIBUTING.md)). No game logic yet. Next concrete step
+is #1 above (skeleton world + frog-only location set), which can happen in
+parallel with the connector's recon phase.
+
+## Development
+
+Clean code/architecture rules, the 100%-logic-tested policy, and how to run
+the full check suite locally are in [`CONTRIBUTING.md`](./CONTRIBUTING.md).
 
 ## License
 
