@@ -3,6 +3,8 @@ name = "mgsdelta-apworld"
 version = "0.1.0"
 description = "Archipelago world implementation for Metal Gear Solid Delta: Snake Eater"
 requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
 dependencies = []
 
 [project.optional-dependencies]

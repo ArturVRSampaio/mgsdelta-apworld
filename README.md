@@ -16,6 +16,23 @@ If you're new to Archipelago world development, read
 and an existing simple world (e.g. `worlds/clique` in the main repo) before diving in
 here — this README assumes that context.
 
+## Install
+
+```bash
+git clone --recurse-submodules https://github.com/ArturVRSampaio/mgsdelta-apworld.git
+cd mgsdelta-apworld
+# if you cloned without --recurse-submodules:
+#   git submodule update --init
+
+python3 -m venv .venv
+.venv/bin/pip install -e ".[dev]"
+.venv/bin/pip install -r Archipelago/requirements.txt  # real Archipelago core, needed to run tests
+```
+
+Then `.venv/bin/pytest --cov` should pass. See [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+for the full check suite (lint, types, mutation testing) and a Windows caveat
+on the mutation step.
+
 ## Layout
 
 ```
@@ -130,5 +147,5 @@ Either path needs, before it's ready:
 
 ## License
 
-TBD — pick something compatible with Archipelago's own license (MIT) before
-submitting upstream.
+[MIT](./LICENSE) — matches Archipelago core's own license, since this world
+is meant to eventually plug into it.
