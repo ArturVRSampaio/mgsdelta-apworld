@@ -13,12 +13,16 @@ Two things mutmut's own CLI doesn't do out of the box, both handled here:
    the actual pass/fail signal is whether `mutmut results` prints anything.
    We treat any output there (survived mutants OR mutants with no covering
    test at all) as a CI failure.
+3. On failure, `mutmut results` only names the survivors — it doesn't show
+   what changed. We follow up with `mutmut show <id>` per survivor so the
+   CI log has the actual diff, not just an ID to look up separately.
 """
 
 from __future__ import annotations
 
 import ast
 import fnmatch
+import re
 import subprocess
 import sys
 import tomllib
@@ -53,6 +57,14 @@ def main() -> int:
     print(results.stdout, end="")
 
     if results.stdout.strip():
+        for mutant_id in re.findall(r"^\s*(\S+): survived\s*$", results.stdout, re.MULTILINE):
+            diff = subprocess.run(
+                [sys.executable, "-m", "mutmut", "show", mutant_id],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            print(f"\n--- {mutant_id} ---\n{diff.stdout}")
         print(
             "Mutation testing found survived and/or untested mutants (see above).",
             file=sys.stderr,
