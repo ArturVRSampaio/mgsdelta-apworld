@@ -6,9 +6,47 @@ directory (or packaged as `mgsdelta.apworld`) — see the repo README for the
 full build plan. Nothing here talks to the game; that's `mgsdelta-connector`'s job.
 """
 
-# TODO: implement MGSDeltaWorld(World) once the skeleton milestone starts.
-# from worlds.AutoWorld import World
-#
-# class MGSDeltaWorld(World):
-#     game = "Metal Gear Solid Delta: Snake Eater"
-#     ...
+from __future__ import annotations
+
+from BaseClasses import ItemClassification
+from worlds.AutoWorld import WebWorld, World
+
+from . import Regions, Rules
+from .Items import FILLER_ITEM_NAME, ITEM_NAME_TO_ID, MGSDeltaItem
+from .Locations import LOCATION_NAME_TO_ID
+
+
+class MGSDeltaWebWorld(WebWorld):
+    """WebHost display config. Setup guide/game info docs land before any upstream submission."""
+
+    game = "Metal Gear Solid Delta: Snake Eater"
+    theme = "ocean"
+
+
+class MGSDeltaWorld(World):
+    """Archipelago world for Metal Gear Solid Delta: Snake Eater.
+
+    Skeleton milestone (build plan #1): registers the world with a
+    frog-only location set and no traversal logic yet.
+    """
+
+    game = "Metal Gear Solid Delta: Snake Eater"
+    web = MGSDeltaWebWorld()
+
+    item_name_to_id = ITEM_NAME_TO_ID
+    location_name_to_id = LOCATION_NAME_TO_ID
+
+    def create_regions(self) -> None:
+        Regions.create_regions(self)
+
+    def set_rules(self) -> None:
+        Rules.set_rules(self)
+
+    def create_items(self) -> None:
+        filler_count = len(self.multiworld.get_unfilled_locations(self.player))
+        fillers = (self.create_item(FILLER_ITEM_NAME) for _ in range(filler_count))
+        self.multiworld.itempool += fillers
+
+    def create_item(self, name: str) -> MGSDeltaItem:
+        item_id = self.item_name_to_id[name]
+        return MGSDeltaItem(name, ItemClassification.filler, item_id, self.player)

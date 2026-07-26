@@ -24,6 +24,9 @@ include = ["mgsdelta*"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+# Archipelago is a vendored submodule (real core, needed to import
+# worlds.AutoWorld/BaseClasses for testing) — not our code, don't lint/format it.
+extend-exclude = ["Archipelago"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "C90"]
@@ -39,6 +42,16 @@ python_version = "3.12"
 strict = true
 files = ["mgsdelta", "scripts"]
 exclude = ["mgsdelta/test"]
+# Archipelago core (BaseClasses/World/etc.) intentionally stays off mypy_path:
+# pointing mypy at the submodule would make it follow AutoWorld's imports
+# into every bundled game world, which isn't our code and isn't mypy-clean.
+# Instead we leave those two imports unresolved (-> Any) and only relax the
+# one strict check that matters for subclassing an Any-typed external base.
+disallow_subclassing_any = false
+
+[[tool.mypy.overrides]]
+module = ["BaseClasses", "worlds.AutoWorld"]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["mgsdelta/test"]

@@ -55,12 +55,28 @@ plain inputs/outputs, with no `MultiWorld` generation required to exercise it.
 ### Bootstrapping note
 
 `mutmut` needs at least one real function in the codebase to hook its
-self-check into — on a tree of pure stub/docstring files (like this repo
-today) it fails with a misleading error. `scripts/run_mutation_tests.py`
-detects that state and skips cleanly instead of red-X'ing every commit. The
-moment the first real function lands, that exemption disappears and mutation
-testing becomes a real, enforced gate — this is intentional, not a
-loophole to rely on.
+self-check into — on a tree of pure stub/docstring files it fails with a
+misleading error. `scripts/run_mutation_tests.py` detected that state and
+skipped cleanly instead of red-X'ing every commit. That exemption no longer
+applies: the frog-skeleton milestone landed real functions, so mutation
+testing is now a real, enforced gate.
+
+### Archipelago core dependency
+
+This world needs real Archipelago core (`worlds.AutoWorld`, `BaseClasses`,
+`test.bases`, ...) to mean anything — it's vendored as a pinned git
+submodule at `Archipelago/` (currently tag `0.6.7`) rather than a pip
+dependency, since it isn't published as an installable package.
+`conftest.py` puts it on `sys.path` and forces `SKIP_REQUIREMENTS_UPDATE=1`
+so importing it doesn't trigger its interactive dependency-update prompt.
+Ruff/mypy are configured to not lint or type-check the submodule itself
+(see `pyproject.toml`) — it's vendored code we don't own.
+
+`mutmut` imports Python's `resource` module, which doesn't exist on
+Windows — the mutation gate can only actually run on Linux/macOS (CI uses
+`ubuntu-latest`). On Windows, `scripts/run_mutation_tests.py` will report
+false success without ever running a mutant; don't trust a local "All
+mutants killed" on that platform.
 
 ## One intentional lint deviation
 
@@ -72,8 +88,11 @@ anyone who's touched another AP world.
 ## Running the checks locally
 
 ```bash
+git submodule update --init  # first time only, fetches Archipelago/ core
+
 python3 -m venv .venv
 .venv/bin/pip install -e ".[dev]"
+.venv/bin/pip install -r Archipelago/requirements.txt  # needed for pytest/mutmut, not lint
 
 .venv/bin/ruff check .
 .venv/bin/ruff format --check .
@@ -83,3 +102,4 @@ python3 -m venv .venv
 ```
 
 All five must pass before opening a PR — CI runs the exact same commands.
+The mutation step can only run on Linux/macOS; see the Windows caveat above.

@@ -1,5 +1,4 @@
 # Archipelago TestBase test cases go here.
 #
-# TODO: first test to write once the skeleton world milestone lands is a
-# generic TestBase smoke test (world generates, fills, no logic errors) with
-# the frog-only location set.
+# This file is intentionally empty beyond this comment — see bases.py for the
+# shared MGSDeltaTestBase, and test_frog_skeleton.py for the actual tests.

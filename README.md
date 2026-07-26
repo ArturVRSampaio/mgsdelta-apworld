@@ -85,10 +85,14 @@ actually verify ownership of at runtime.
 
 ## Status
 
-Tooling/CI scaffold done (lint, types, tests+coverage, mutation testing — see
-[`CONTRIBUTING.md`](./CONTRIBUTING.md)). No game logic yet. Next concrete step
-is #1 above (skeleton world + frog-only location set), which can happen in
-parallel with the connector's recon phase.
+As of 2026-07-26: build plan #1 (skeleton world) is done — `MGSDeltaWorld`
+registers, all 64 Kerotan frogs exist as locations in a single "Menu"
+region with no traversal logic yet, and the world generates/fills/completes
+against real Archipelago core (vendored as a pinned submodule at
+`Archipelago/`, tag `0.6.7` — see `CONTRIBUTING.md`). Item pool is a single
+placeholder filler item; there's no real region graph, logic, or goal yet.
+Next concrete step is #2 (region graph v0), which can happen in parallel
+with the connector's recon phase.
 
 ## Development
 
