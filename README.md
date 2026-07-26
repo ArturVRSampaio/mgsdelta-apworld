@@ -59,8 +59,14 @@ mgsdelta/
   new game behavior needs to be invented, only triggered.
 
 ### Location pool (draft)
-- All 64 Kerotan frogs (great low-stakes filler-heavy check pool, easy to reason
-  about logic for since they're mostly just "reachable" checks).
+- All 64 Kerotan **frogs** (great low-stakes filler-heavy check pool, easy to
+  reason about logic for since they're mostly just "reachable" checks) — and/or
+  the 64 Gako **ducks**, a same-shape collectible on the same in-game
+  subsystem. **The connector confirmed reading the duck counter live before
+  the frog one** (see `mgsdelta-connector`'s README/NOTES), so ducks are the
+  current frontrunner to be the real first-implemented location set once this
+  world grows past the skeleton milestone — frogs remain the flavor-preferred
+  choice if/when their equivalent read is confirmed too.
 - Weapon/item pickup spots.
 - Cobra Unit boss defeats (The Pain, The Fear, The End, The Fury, The Sorrow,
   The Boss) as location checks with their vanilla reward as the local placement,
