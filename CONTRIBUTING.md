@@ -78,6 +78,15 @@ Windows — the mutation gate can only actually run on Linux/macOS (CI uses
 false success without ever running a mutant; don't trust a local "All
 mutants killed" on that platform.
 
+Mutating the whole `mgsdelta/` tree on every run gets slow as real logic
+accumulates. `scripts/run_mutation_tests.py` scopes each run to just the
+`.py` files changed since the best available base ref (PR base ref,
+`origin/main`, or the previous commit) by temporarily rewriting
+`pyproject.toml`'s `paths_to_mutate` and restoring it afterward — mutmut
+itself has no CLI/env override for this, only a pyproject.toml key. If no
+base ref resolves at all (e.g. a single-commit shallow clone), it falls
+back to mutating everything.
+
 ## One intentional lint deviation
 
 `ruff`'s `N999` (module naming) is disabled. Every world in the main
