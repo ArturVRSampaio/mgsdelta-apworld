@@ -108,8 +108,9 @@ region with no traversal logic yet, and the world generates/fills/completes
 against real Archipelago core (vendored as a pinned submodule at
 `Archipelago/`, tag `0.6.7` — see `CONTRIBUTING.md`). Item pool is a single
 placeholder filler item; there's no real region graph, logic, or goal yet.
-Next concrete step is #2 (region graph v0), which can happen in parallel
-with the connector's recon phase.
+Next concrete step is #2 (region graph v0). The connector's recon phase is
+now done too (UE4SS confirmed working — see that repo's README/NOTES), so
+both repos are free to move on their next milestones independently.
 
 ## Development
 
