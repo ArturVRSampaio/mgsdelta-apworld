@@ -1,5 +1,8 @@
 # mgsdelta-apworld
 
+[![CI](https://github.com/arturvrsampaio/mgsdelta-apworld/actions/workflows/ci.yml/badge.svg)](https://github.com/arturvrsampaio/mgsdelta-apworld/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/arturvrsampaio/mgsdelta-apworld/graph/badge.svg)](https://codecov.io/gh/arturvrsampaio/mgsdelta-apworld)
+
 Archipelago "world" implementation for **Metal Gear Solid Δ: Snake Eater**.
 
 This is the piece that plugs into the Archipelago **generator/server**. It defines
@@ -91,6 +94,16 @@ parallel with the connector's recon phase.
 
 Clean code/architecture rules, the 100%-logic-tested policy, and how to run
 the full check suite locally are in [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+
+### One-time setup after pushing to GitHub
+
+CI (lint/types/tests/mutation testing) works immediately with no setup. The
+Codecov badge needs one manual step first: sign in to
+[codecov.io](https://codecov.io) with GitHub, enable this repo, copy its
+upload token, then add it as a repository secret named `CODECOV_TOKEN`
+(Settings → Secrets and variables → Actions) here on GitHub. Until that's
+done, the `codecov-action` upload step in CI will fail — everything else is
+unaffected.
 
 ## License
 
