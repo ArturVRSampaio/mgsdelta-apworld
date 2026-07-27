@@ -13,7 +13,7 @@ from BaseClasses import CollectionState
 
 from .. import Rules
 from ..Items import FILLER_ITEM_NAME, MGSDeltaItem
-from ..Locations import FROG_COUNT, LOCATION_NAME_TO_ID, MGSDeltaLocation
+from ..Locations import FROG_COUNT, FROG_LOCATION_NAMES, LOCATION_NAME_TO_ID, MGSDeltaLocation
 from ..Regions import VICTORY_EVENT_ITEM, VICTORY_EVENT_LOCATION
 from .bases import MGSDeltaTestBase
 
@@ -22,8 +22,9 @@ class TestFrogSkeleton(MGSDeltaTestBase):
     options = {"progression_balancing": 0}
 
     def test_all_frog_locations_are_registered(self) -> None:
-        self.assertEqual(FROG_COUNT, len(LOCATION_NAME_TO_ID))
-        for location_name in LOCATION_NAME_TO_ID:
+        self.assertEqual(FROG_COUNT, len(FROG_LOCATION_NAMES))
+        for location_name in FROG_LOCATION_NAMES:
+            self.assertIn(location_name, LOCATION_NAME_TO_ID)
             location = self.multiworld.get_location(location_name, self.player)
             self.assertIsInstance(location, MGSDeltaLocation)
 

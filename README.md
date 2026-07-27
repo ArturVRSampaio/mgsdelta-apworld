@@ -60,13 +60,15 @@ mgsdelta/
 
 ### Location pool (draft)
 - All 64 Kerotan **frogs** (great low-stakes filler-heavy check pool, easy to
-  reason about logic for since they're mostly just "reachable" checks) — and/or
-  the 64 Gako **ducks**, a same-shape collectible on the same in-game
-  subsystem. **The connector confirmed reading the duck counter live before
-  the frog one** (see `mgsdelta-connector`'s README/NOTES), so ducks are the
-  current frontrunner to be the real first-implemented location set once this
-  world grows past the skeleton milestone — frogs remain the flavor-preferred
-  choice if/when their equivalent read is confirmed too.
+  reason about logic for since they're mostly just "reachable" checks) —
+  skeleton-milestone-only, not actually connector-confirmed detectable
+  (their aggregate read function has never been found — see
+  `mgsdelta-connector`'s NOTES.md).
+- All 64 Gako **ducks** — **added for real in build plan #4**, once the
+  connector confirmed (research/NOTES.md milestone 4 there) it can both
+  detect a duck being collected as a location check and remotely trigger
+  one via the "Unlock Duck" item. This is the first location set that's
+  actually connector-confirmed both ways, not just a skeleton placeholder.
 - Weapon/item pickup spots.
 - Cobra Unit boss defeats (The Pain, The Fear, The End, The Fury, The Sorrow,
   The Boss) as location checks with their vanilla reward as the local placement,
@@ -108,12 +110,15 @@ actually verify ownership of at runtime.
 
 ## Status
 
-As of 2026-07-26: build plan #1 (skeleton world) is done — `MGSDeltaWorld`
+As of 2026-07-27: build plan #1 (skeleton world) is done — `MGSDeltaWorld`
 registers, all 64 Kerotan frogs exist as locations in a single "Menu"
 region with no traversal logic yet, and the world generates/fills/completes
 against real Archipelago core (vendored as a pinned submodule at
-`Archipelago/`, tag `0.6.7` — see `CONTRIBUTING.md`). Item pool is a single
-placeholder filler item; there's no real region graph, logic, or goal yet.
+`Archipelago/`, tag `0.6.7` — see `CONTRIBUTING.md`). Build plan #4 has its
+first real growth too: 64 Gako duck locations plus a real "Unlock Duck"
+item (one per duck location, filling the rest of the pool with the
+skeleton's `Ration` filler) — these are connector-confirmed both ways, not
+placeholders, matching `mgsdelta-connector`'s live milestone-4 proof.
 Next concrete step is #2 (region graph v0). The connector's recon phase is
 now done too (UE4SS confirmed working — see that repo's README/NOTES), so
 both repos are free to move on their next milestones independently.

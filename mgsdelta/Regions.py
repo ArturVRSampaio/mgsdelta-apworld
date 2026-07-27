@@ -3,7 +3,9 @@ Region graph for MGS Delta.
 
 Skeleton milestone (build plan #1): a single "Menu" region holding all 64
 frog locations plus the placeholder Victory event — no traversal logic yet.
-The real chapter-by-chapter graph (see README "Regions & logic")
+Build plan #4 growth added the 64 duck locations to the same region (see
+Locations.py) — still no real traversal logic, just more locations in the
+same flat pool. The real chapter-by-chapter graph (see README "Regions & logic")
 
     Dolinovodno -> Ravine -> Bolshaya Past forest -> Ponizovje swamp
         -> Groznyj Grad -> Volgin's chapters -> credits
